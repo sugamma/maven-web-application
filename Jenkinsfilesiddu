@@ -5,11 +5,11 @@ node
     {
     git credentialsId: '9b2d1e2c-7949-474e-b94d-08aec32d1dcb', url: 'https://github.com/sugamma/maven-web-application.git'
 }
-/*
    stage('mavenbuild')
    {
      sh "${mavenHome}/bin/mvn clean package"  
    }
+   /*
    stage('deployed sonarquebeserver')
    {
      sh "${mavenHome}/bin/mvn clean sonar:sonar"  
