@@ -1,0 +1,23 @@
+node
+{
+    def mavenHome = tool name: "Maven3.9.1"
+    stage('checkoutcode')
+    {
+    git credentialsId: '9b2d1e2c-7949-474e-b94d-08aec32d1dcb', url: 'https://github.com/sugamma/maven-web-application.git'
+}
+   stage('mavenbuild')
+   {
+     sh "${mavenHome}/bin/mvn clean package"  
+   }
+   stage('deployed sonarquebeserver')
+   {
+     sh "${mavenHome}/bin/mvn clean sonar:sonar"  
+   }
+   stage('deployedapplicationTomcatserver')
+   {
+     sshagent(['a6257a57-21c3-494b-aca9-1c2036cde36a']) {
+    sh "scp -o StrictHostKeyChecking=no target/maven-web-application.war ec2-user@43.204.97.110:/opt/apache-tomcat-9.0.73/webapps/"
+}  
+   }
+  
+}
