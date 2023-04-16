@@ -1,0 +1,46 @@
+pipeline
+{
+    agent any
+    tools {
+        maven 'Maven3.9.1'
+    }
+    
+    stages
+        {
+            stage('checkoutcodeexcute')
+            {
+            steps{
+                git credentialsId: '9b2d1e2c-7949-474e-b94d-08aec32d1dcb', url: 'https://github.com/sugamma/maven-web-application.git'
+            }
+            }
+            stage('mavenbuild')
+            {
+                steps{
+                    sh "mvn clean package"
+                }
+            }
+        
+        stage('codequalitycheck')
+            {
+                steps{
+                    sh "mvn clean sonar:sonar"
+                }
+            }
+        
+        stage('artifactoryrepositorymanager')
+            {
+                steps{
+                    sh "mvn clean deploy"
+                }
+            }
+        
+        stage('DeployetheapplicationTomcatserver')
+            {
+                steps{
+                    sshagent(['a6257a57-21c3-494b-aca9-1c2036cde36a']) {
+    sh "scp -o StrictHostKeyChecking=no target/maven-web-application.war ec2-user@13.232.61.60:/opt/apache-tomcat-9.0.73/webapps"
+}
+                }
+            }
+    }
+}
