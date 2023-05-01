@@ -98,13 +98,13 @@
 	    <repository>
 	      <id>nexus</id>
 	      <name>Mithun Technologies Releases Nexus Repository</name>
-	      <url>http://43.205.117.71:9845/repository/vachan-release/</url>
+	      <url>http://13.233.244.160:9845/repository/suppi-snapshot/</url>
 	    </repository>
 	    
 	    <snapshotRepository>
 	      <id>nexus</id>
 	      <name>Mithun Technologies Snapshot Nexus Repository </name>
-	      <url>http://43.205.117.71:9845/repository/vachan-snapshot/</url>
+	      <url>http://13.233.244.160:9845/repository/suppi-release/</url>
 	    </snapshotRepository>
 	    
 	</distributionManagement>
