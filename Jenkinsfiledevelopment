@@ -14,6 +14,7 @@ node
     {
         sh "${mavenHome}/bin/mvn sonar:sonar"
     }
+    */
     stage ('uploadartifactnexus')
     {
         sh "${mavenHome}/bin/mvn deploy"
@@ -26,6 +27,5 @@ node
     {
         emailext body: '''Thanks,
 Siddu''', subject: 'BUILD succcess', to: 'siddalingaswami11@gmail.com'
-    } 
-    */
+    }
 }
